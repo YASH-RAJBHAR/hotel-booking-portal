@@ -44,9 +44,7 @@ A full-stack hotel booking application built with **Angular 17**, **Spring Boot 
 *3. Booking Cancelled (`✗ CANCELLED` status & inventory released):*
 ![Booking Cancelled](docs/screenshots/04-manage-booking-cancelled.png)
 
-> **Demo Video / Recording**: [Link to Video Recording](https://github.com/YASH-RAJBHAR/hotel-booking-portal) *(Upload your demo video link or Loom / Drive link here)*
-
----
+> **🎥 Demo Video / Walkthrough**: [Watch Demo Video on Google Drive](https://drive.google.com/drive/u/2/folders/1CXf1t0HSGBAV6giqesQAY_pCTZmvYfo-)
 
 ---
 
