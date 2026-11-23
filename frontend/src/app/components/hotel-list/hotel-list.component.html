@@ -1,0 +1,89 @@
+<section class="search-section no-print">
+  <div class="container">
+    <div class="search-hero">
+      <h1>Find Your Perfect Stay</h1>
+      <p>Explore handpicked hotels across India's most beautiful destinations</p>
+    </div>
+    <form [formGroup]="searchForm" (ngSubmit)="loadHotels()" class="search-bar card">
+      <div class="search-fields">
+        <div class="form-group mb-0">
+          <label>Destination</label>
+          <select formControlName="location">
+            <option value="">All Destinations</option>
+            @for (loc of locations; track loc) {
+              @if (loc) { <option [value]="loc">{{ loc }}</option> }
+            }
+          </select>
+        </div>
+        <div class="form-group mb-0">
+          <label>Check‑in</label>
+          <input type="date" formControlName="checkIn" [min]="today" (change)="searchForm.patchValue({checkOut:''})">
+        </div>
+        <div class="form-group mb-0">
+          <label>Check‑out</label>
+          <input type="date" formControlName="checkOut" [min]="minCheckOut">
+        </div>
+        <button type="submit" class="btn btn-primary search-btn">
+          🔍 Search
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="container results-section">
+  @if (loading) {
+    <div class="spinner"></div>
+  }
+  @if (error) {
+    <div class="alert alert-error">{{ error }}</div>
+  }
+  @if (!loading && !error) {
+    <div class="results-header">
+      <h2>{{ hotels.length }} hotel{{ hotels.length !== 1 ? 's' : '' }} found</h2>
+    </div>
+    <div class="hotel-grid">
+      @for (hotel of hotels; track hotel.id) {
+        <div class="hotel-card card">
+          <div class="hotel-img-wrap">
+            <img [src]="hotel.imageUrl" [alt]="hotel.name" class="hotel-img" loading="lazy"
+                 onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80'">
+            <span class="location-badge">📍 {{ hotel.location }}</span>
+          </div>
+          <div class="hotel-body">
+            <h3 class="hotel-name">{{ hotel.name }}</h3>
+            <p class="hotel-category">🛏 {{ hotel.roomCategory }}</p>
+            <p class="hotel-desc">{{ hotel.description | slice:0:100 }}…</p>
+            <div class="amenities">
+              @for (a of amenitiesList(hotel.amenities).slice(0,4); track a) {
+                <span class="amenity-tag">{{ a }}</span>
+              }
+            </div>
+            <div class="hotel-footer">
+              <div class="price-block">
+                <span class="price">{{ formatPrice(hotel.pricePerNight) }}</span>
+                <span class="price-unit">/night</span>
+              </div>
+              <div class="avail-block">
+                @if (searchForm.value.checkIn && searchForm.value.checkOut) {
+                  @if (hotel.availableRooms > 0) {
+                    <span class="badge badge-green">{{ hotel.availableRooms }} room{{ hotel.availableRooms > 1 ? 's' : '' }} left</span>
+                  } @else {
+                    <span class="badge badge-red">Sold Out</span>
+                  }
+                } @else {
+                  <span class="badge badge-blue">{{ hotel.totalRooms }} rooms</span>
+                }
+              </div>
+            </div>
+            <a [routerLink]="['/hotels', hotel.id]"
+               [queryParams]="{ checkIn: searchForm.value.checkIn, checkOut: searchForm.value.checkOut }"
+               class="btn btn-primary view-btn">
+              View Details →
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

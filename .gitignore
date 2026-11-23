@@ -1,0 +1,32 @@
+# Java / Maven
+target/
+apache-maven-3.9.6/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/
+mvnw
+mvnw.cmd
+
+# Spring Boot application.properties (contains credentials)
+backend/src/main/resources/application.properties
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+*.env
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db

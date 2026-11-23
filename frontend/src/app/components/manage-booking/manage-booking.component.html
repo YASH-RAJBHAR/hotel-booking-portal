@@ -1,0 +1,117 @@
+<div class="container page-wrapper">
+  <div class="page-header no-print">
+    <h1>Manage Your Booking</h1>
+    <p>Enter your booking reference and email address to view or cancel your reservation.</p>
+  </div>
+
+  <!-- Lookup form -->
+  <div class="card lookup-card no-print">
+    <form [formGroup]="lookupForm" (ngSubmit)="lookup()">
+      @if (error) { <div class="alert alert-error">{{ error }}</div> }
+      <div class="lookup-fields">
+        <div class="form-group mb-0">
+          <label>Booking Reference</label>
+          <input type="text" formControlName="reference" placeholder="TC-XXXXXX" style="text-transform:uppercase">
+          @if (f['reference'].touched && f['reference'].errors?.['required']) {
+            <span class="error-msg">Booking reference is required.</span>
+          }
+          @if (f['reference'].touched && f['reference'].errors?.['pattern']) {
+            <span class="error-msg">Format must be TC-XXXXXX (e.g. TC-ABC123).</span>
+          }
+        </div>
+        <div class="form-group mb-0">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="you@example.com">
+          @if (f['email'].touched && f['email'].errors?.['required']) {
+            <span class="error-msg">Email is required.</span>
+          }
+          @if (f['email'].touched && f['email'].errors?.['email']) {
+            <span class="error-msg">Enter a valid email address.</span>
+          }
+        </div>
+        <button type="submit" class="btn btn-primary lookup-btn" [disabled]="loading">
+          {{ loading ? 'Looking up…' : '🔍 Find Booking' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Booking details -->
+  @if (booking) {
+    <div class="voucher-card card">
+      <div class="voucher-header">
+        <div>
+          <div class="voucher-logo">🏨 HotelBooking</div>
+          <h2>Booking Details</h2>
+        </div>
+        @if (booking.status === 'CONFIRMED') {
+          <span class="badge badge-green status-badge">✓ CONFIRMED</span>
+        } @else {
+          <span class="badge badge-red status-badge">✗ CANCELLED</span>
+        }
+      </div>
+
+      <div class="voucher-ref">
+        Booking Reference: <strong>{{ booking.bookingReference }}</strong>
+      </div>
+
+      <div class="voucher-grid">
+        <div class="voucher-section">
+          <h4>Hotel Details</h4>
+          <p><strong>{{ booking.hotelName }}</strong></p>
+          <p>📍 {{ booking.hotelLocation }}</p>
+        </div>
+        <div class="voucher-section">
+          <h4>Guest Details</h4>
+          <p>{{ booking.guestName }}</p>
+          <p>{{ booking.guestEmail }}</p>
+        </div>
+        <div class="voucher-section">
+          <h4>Stay Details</h4>
+          <p>Check‑in: <strong>{{ formatDate(booking.checkInDate) }}</strong></p>
+          <p>Check‑out: <strong>{{ formatDate(booking.checkOutDate) }}</strong></p>
+          <p>Duration: <strong>{{ booking.nights }} night{{ booking.nights > 1 ? 's' : '' }}</strong></p>
+        </div>
+        <div class="voucher-section highlight">
+          <h4>Amount</h4>
+          <div class="voucher-price">{{ formatPrice(booking.totalAmount) }}</div>
+          <p>{{ formatPrice(booking.pricePerNight) }} × {{ booking.nights }} night{{ booking.nights > 1 ? 's' : '' }}</p>
+        </div>
+      </div>
+
+      <div class="voucher-footer">
+        <p>Booked on: {{ booking.createdAt | date:'medium' }}</p>
+        <div class="action-btns no-print">
+          <button class="btn btn-secondary" (click)="printVoucher()">🖨 Print Voucher</button>
+          @if (booking.status === 'CONFIRMED') {
+            <button class="btn btn-danger" (click)="confirmCancel()" [disabled]="cancelling">
+              {{ cancelling ? 'Cancelling…' : 'Cancel Booking' }}
+            </button>
+          }
+        </div>
+      </div>
+
+      @if (cancelSuccess) {
+        <div class="alert alert-success" style="margin-top:1rem">{{ cancelSuccess }}</div>
+      }
+      @if (cancelError) {
+        <div class="alert alert-error" style="margin-top:1rem">{{ cancelError }}</div>
+      }
+    </div>
+
+    <!-- Confirm cancel dialog -->
+    @if (showCancelConfirm) {
+      <div class="confirm-overlay no-print">
+        <div class="confirm-dialog card">
+          <h3>Cancel Booking?</h3>
+          <p>Are you sure you want to cancel booking <strong>{{ booking.bookingReference }}</strong>?
+            This action cannot be undone.</p>
+          <div class="confirm-actions">
+            <button class="btn btn-secondary" (click)="dismissCancel()">Keep Booking</button>
+            <button class="btn btn-danger" (click)="cancelBooking()">Yes, Cancel</button>
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>
