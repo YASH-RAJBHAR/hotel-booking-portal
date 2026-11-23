@@ -7,14 +7,35 @@ A full-stack hotel booking application built with **Angular 17**, **Spring Boot 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
 2. [Quick Start](#quick-start)
-3. [Database Setup](#database-setup)
-4. [Backend Setup](#backend-setup)
-5. [Frontend Setup](#frontend-setup)
-6. [API Quick-Test Guide](#api-quick-test-guide)
-7. [Running Tests](#running-tests)
-8. [Project Structure](#project-structure)
-9. [Time Spent](#time-spent)
-10. [AI Assistance Disclosure](#ai-assistance-disclosure)
+3. [Screenshots & Demo](#screenshots--demo)
+4. [Database Setup](#database-setup)
+5. [Backend Setup](#backend-setup)
+6. [Frontend Setup](#frontend-setup)
+7. [API Quick-Test Guide](#api-quick-test-guide)
+8. [Running Tests](#running-tests)
+9. [Project Structure](#project-structure)
+10. [Time Spent](#time-spent)
+11. [AI Assistance Disclosure](#ai-assistance-disclosure)
+
+---
+
+## Screenshots & Demo
+
+### 1. Explore Hotels & Live Availability
+![Hotel Search & Live Availability](docs/screenshots/01-hotel-search.png)
+
+### 2. Hotel Details, Price Preview & Smart Alternate Dates (Surprise Feature)
+![Hotel Details & Alternate Dates](docs/screenshots/02-hotel-details-alternate-dates.png)
+
+### 3. Booking Confirmation & Instant Printable Voucher
+![Booking Voucher](docs/screenshots/03-booking-confirmation-voucher.png)
+
+### 4. Manage / Cancel Booking
+![Manage & Cancel Booking](docs/screenshots/04-manage-cancel-booking.png)
+
+> **Demo Video / Recording**: [Link to Video Recording](https://github.com/YASH-RAJBHAR/hotel-booking-portal) *(Upload your demo video link or Loom / Drive link here)*
+
+---
 
 ---
 
