@@ -30,6 +30,9 @@ A full-stack hotel booking application built with **Angular 17**, **Spring Boot 
 ### 3. Booking Confirmation & Instant Printable Voucher
 ![Booking Voucher](docs/screenshots/03-booking-confirmation-voucher.png)
 
+*Print-to-PDF Preview using custom `@media print` CSS:*
+![Printable Voucher Preview](docs/screenshots/03-printable-voucher-preview.png)
+
 ### 4. Manage / Cancel Booking
 ![Manage & Cancel Booking](docs/screenshots/04-manage-cancel-booking.png)
 
