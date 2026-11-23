@@ -33,8 +33,16 @@ A full-stack hotel booking application built with **Angular 17**, **Spring Boot 
 *Print-to-PDF Preview using custom `@media print` CSS:*
 ![Printable Voucher Preview](docs/screenshots/03-printable-voucher-preview.png)
 
-### 4. Manage / Cancel Booking
-![Manage & Cancel Booking](docs/screenshots/04-manage-cancel-booking.png)
+### 4. Manage / Cancel Booking Flow
+
+*1. Retrieve Booking by Reference & Email (`✓ CONFIRMED` status):*
+![Manage Booking Lookup](docs/screenshots/04-manage-cancel-booking.png)
+
+*2. Cancellation Confirmation Dialog:*
+![Cancel Confirmation Modal](docs/screenshots/04-manage-booking-modal.png)
+
+*3. Booking Cancelled (`✗ CANCELLED` status & inventory released):*
+![Booking Cancelled](docs/screenshots/04-manage-booking-cancelled.png)
 
 > **Demo Video / Recording**: [Link to Video Recording](https://github.com/YASH-RAJBHAR/hotel-booking-portal) *(Upload your demo video link or Loom / Drive link here)*
 
